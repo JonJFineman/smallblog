@@ -42,7 +42,8 @@ sub parse_post {
 	}
 
 	# Grab date from path and reformat slashes to dashes
-	my ($year,$month,$day) = ($path =~ m/(.*)\/(.*)\/(.*)\/.*.md/);
+	#my ($year,$month,$day) = ($path =~ m/(.*)\/(.*)\/(.*)\/.*.md/);
+	my ($year,$month,$day) = ($path =~ m/(....)(..)(..)_.*.md/);
 	$date = "$year-$month-$day";
 
 	# Grab the file mtime with stat as edited time
@@ -96,7 +97,9 @@ sub parse_page {
 }
 
 # Grab markdown files from a YYYY/MM/DD/post.md structure
-my @paths = split("\n", qx(ls -r blog/*/*/*/*.md));
+#my @paths = split("\n", qx(ls -r blog/*/*/*/*.md));
+# Grab markdown files from a YYYYMMDD_post.md structure
+my @paths = split("\n", qx(ls -r blog/posts/*.md));
 
 # Parse the files into an array to save filesystem lookups
 my @posts = map {parse_post($_)} @paths;
